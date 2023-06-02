@@ -1,0 +1,55 @@
+<div class="overflow-x-auto">
+  <table class="table-fixed border-collapse border border-gray-300">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">SrNo</th>
+        <th class="px-4 py-2">Broker</th>
+        <th class="px-4 py-2">Client Name</th>
+        <th class="px-4 py-2">Trip ID</th>
+        <th class="px-4 py-2">Insurance ID</th>
+        <th class="px-4 py-2">ClientID</th>
+        <th class="px-4 py-2">Phone Number</th>
+        <th class="px-4 py-2">Cell Number</th>
+        <th class="px-4 py-2">PU</th>
+        <th class="px-4 py-2">DO</th>
+        <th class="px-4 py-2">State</th>
+        <th class="px-4 py-2">Miles</th>
+        <th class="px-4 py-2">Notes</th>
+        <th class="px-4 py-2">Escorts</th>
+        <th class="px-4 py-2">Leg PU & DO</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let disp of dispData; let i = index">
+        <td class="border px-4 py-2">{{disp.id}}</td>
+        <td class="border px-4 py-2">{{disp.broker}}</td>
+        <td class="border px-4 py-2">{{disp.clientName}}</td>
+        <td class="border px-4 py-2">{{disp.tripId}}</td>
+        <td class="border px-4 py-2">{{disp.insuranceId}}</td>
+        <td class="border px-4 py-2">{{disp.clientId}}</td>
+        <td class="border px-4 py-2">{{disp.phoneNumber}}</td>
+        <td class="border px-4 py-2">{{disp.cellNumber}}</td>
+        <td class="border px-4 py-2">{{disp.pickAddress}}</td>
+        <td class="border px-4 py-2">{{disp.dropAddress}}</td>
+        <td class="border px-4 py-2">{{disp.state}}</td>
+        <td class="border px-4 py-2">{{disp.miles}}</td>
+        <td class="border px-4 py-2">{{disp.cNotes}}</td>
+        <td class="border px-4 py-2">{{disp.escorts}}</td>
+        <td class="border px-4 py-2">
+          <table *ngIf="disp.legs" class="table-fixed">
+            <tbody>
+              <tr *ngFor="let leg of disp.legs;">
+                <td class="border px-4 py-2">{{leg.pickAddress}}</td>
+                <td class="border px-4 py-2">{{leg.dropAddress}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td class="border px-4 py-2">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="editData(disp.id)">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
