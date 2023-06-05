@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, getDocs } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-brokerlist',
   templateUrl: './brokerlist.component.html',
@@ -95,8 +96,30 @@ export class BrokerlistComponent {
   constructor(private firestore: Firestore, private router: Router) {
     this.brokerRef = collection(this.firestore, 'BrokerNames');
   }
+
+  ngOnInit() {
+    this.fetchBrokers();
+  }
+
+  fetchBrokers() {
+    getDocs(this.brokerRef)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const brokerData = doc.data() as { [key: string]: string };
+          for (const key in brokerData) {
+            if (Object.prototype.hasOwnProperty.call(brokerData, key)) {
+              this.brokers.push({ key, broker: brokerData[key] });
+            }
+          }
+        });
+      })
+      .catch((error: any) => {
+        console.log('Error fetching brokers:', error);
+      });
+  }
+
   onBrokerSelected(bro: any) {
     this.selectedBroker = bro;
     this.selectbrokerData.emit(this.selectedBroker);
-  }
+}
 }

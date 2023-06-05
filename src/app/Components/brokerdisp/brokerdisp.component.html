@@ -21,8 +21,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let disp of dispData">
-        <td class="border px-4 py-2">{{ disp.id }}</td>
+      <tr *ngFor="let disp of dispData let i = index;" >
+        <td class="border px-4 py-2">{{ i + 1 }}</td>
         <td class="border px-4 py-2">{{ disp.broker }}</td>
         <td class="border px-4 py-2">{{ disp.clientName }}</td>
         <td class="border px-4 py-2">{{ disp.tripId }}</td>
@@ -49,7 +49,7 @@
         <td class="border px-4 py-2">
           <button
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            (click)="editData(disp.id)"
+            (click)="editData(disp.id )"
           >
             Edit
           </button>
