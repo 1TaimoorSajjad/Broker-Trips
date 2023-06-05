@@ -9,10 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {
   Firestore,
-  collectionData,
   collection,
-  addDoc,
+  doc,
+  getDoc,
   updateDoc,
+  addDoc,
 } from '@angular/fire/firestore';
 
 @Component({
@@ -31,13 +32,15 @@ export class BrokerformComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private route: ActivatedRoute
   ) {
     this.collectionRef = collection(this.firestore, 'BrokerTrips');
   }
 
   ngOnInit(): void {
     this.bForm = this.fb.group({
+      documentId: [''],
       broker: [''],
       clientName: [''],
       tripId: [''],
@@ -53,6 +56,31 @@ export class BrokerformComponent implements OnInit {
       escorts: [''],
       legs: this.fb.array([]),
     });
+
+    this.route.params.subscribe((params) => {
+      if (params.id) {
+        this.id = params.id;
+        this.populateFormWithId(this.id);
+      }
+    });
+  }
+
+  populateFormWithId(id: string) {
+    const docRef = doc(this.collectionRef, id);
+
+    getDoc(docRef)
+      .then((docSnap) => {
+        if (docSnap.exists()) {
+          const formData = docSnap.data();
+          formData.documentId = id; // Populate the documentId field
+          this.bForm.patchValue(formData);
+        } else {
+          console.log('Document does not exist');
+        }
+      })
+      .catch((error: any) => {
+        console.log('Error retrieving document:', error);
+      });
   }
 
   onSubmit() {
@@ -62,7 +90,7 @@ export class BrokerformComponent implements OnInit {
       const documentId = formData.documentId;
       delete formData.documentId;
 
-      updateDoc(this.collectionRef, documentId, formData)
+      updateDoc(doc(this.collectionRef, documentId), formData)
         .then(() => {
           console.log('Form data updated in Firestore');
           this.router.navigate(['/brokerdisp']);

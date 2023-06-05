@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let disp of dispData let i = index;" >
-        <td class="border px-4 py-2">{{ i + 1 }}</td>
+        <td class="border px-4 py-2">{{ disp.id }}</td>
         <td class="border px-4 py-2">{{ disp.broker }}</td>
         <td class="border px-4 py-2">{{ disp.clientName }}</td>
         <td class="border px-4 py-2">{{ disp.tripId }}</td>
@@ -53,6 +53,12 @@
           >
             Edit
           </button>
+          <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          (click)="deleteData(disp.id )"
+        >
+          Delete
+        </button>
         </td>
       </tr>
     </tbody>

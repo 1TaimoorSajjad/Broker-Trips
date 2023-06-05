@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Firestore, collectionData, collection, doc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 interface BrokerFormData {
@@ -35,35 +35,44 @@ export class BrokerdispComponent implements OnInit {
   dispData: BrokerFormData[] = [];
   data!: Observable<BrokerFormData[]>;
   collectionRef: any;
-  driverUserId: string | null = null; // Store the id parameter from the URL
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private route: ActivatedRoute
   ) {
     this.collectionRef = collection(this.firestore, 'BrokerTrips');
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.driverUserId = params['id'];
-    });
-
     const collectionRef = collection(this.firestore, 'BrokerTrips');
     this.data = collectionData(collectionRef) as Observable<BrokerFormData[]>;
     this.fetchData();
   }
 
   fetchData() {
+    this.data = collectionData(this.collectionRef, { idField: 'id' }) as Observable<BrokerFormData[]>;
     this.data.subscribe((data: BrokerFormData[]) => {
-      this.dispData = data.map((item) => ({ ...item, id: item.id }));
+      this.dispData = data;
     });
   }
+  
 
   editData(id: string) {
     if (id) {
-      this.router.navigate(['/brokerform/edit', id]);
+      this.router.navigate(['/brokerform/edit', id], { relativeTo: this.route });
+    }
+  }
+  deleteData(id: string) {
+    if (id) {
+      const documentRef = doc(this.firestore, 'BrokerTrips', id); 
+      deleteDoc(documentRef) 
+        .then(() => {
+          console.log('Document deleted successfully');
+        })
+        .catch((error) => {
+          console.error('Error deleting document: ', error);
+        });
     }
   }
 }
