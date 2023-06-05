@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, updateDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-brokerform',
@@ -14,19 +14,22 @@ export class BrokerformComponent implements OnInit {
   fieldSelected = false;
   id!: string;
   index!: number;
+  collectionRef: any;
+
 
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private firestore: Firestore
-  ) { }
+  ) {
+    this.collectionRef = collection(this.firestore, 'BrokerTrips');
+
+  }
 
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params['id'];
-    this.index = +this.activatedRoute.snapshot.params['index'];
+   
 
     this.bForm = this.fb.group({
       broker: [''],
@@ -44,55 +47,38 @@ export class BrokerformComponent implements OnInit {
       escorts: [''],
       legs: this.fb.array([]),
     });
-
-    // if (this.id) {
-    // this.getBrokerFormData(this.id).subscribe((data: any) => {
-    //   if (data) {
-    //     this.bForm.patchValue(data);
-    //   }
-    // });
-
-    const collectionref = collection(this.firestore, 'todo');
-    collectionData(collectionref).subscribe(data => {
-      console.log('data os ', data);
-    }
-    )
-
-  }
-
-  getBrokerFormData(id: string) {
-    const firebaseURL = 'https://brokerform-2a640-default-rtdb.firebaseio.com/';
-    return this.http.get(`${firebaseURL}/brokerforms/${id}.json`);
   }
 
   onSubmit() {
     const formData = this.bForm.value;
 
-    const firebaseURL = 'https://brokerform-2a640-default-rtdb.firebaseio.com/';
-    if (this.id) {
-      this.http.put(`${firebaseURL}/brokerforms/${this.id}.json`, formData).subscribe(
-        () => {
-          console.log('Form data updated in Firebase');
+    if (formData.documentId) {
+      const documentId = formData.documentId;
+      delete formData.documentId;
+
+      updateDoc(this.collectionRef, documentId, formData)
+        .then(() => {
+          console.log('Form data updated in Firestore');
           this.router.navigate(['/brokerdisp']);
-        },
-        (error) => {
-          console.log('Error updating form data in Firebase:', error);
-        }
-      );
+        })
+        .catch((error: any) => {
+          console.log('Error updating form data in Firestore:', error);
+        });
     } else {
-      this.http.post(`${firebaseURL}/brokerforms.json`, formData).subscribe(
-        () => {
-          console.log('Form data sent to Firebase');
+
+      addDoc(this.collectionRef, formData)
+        .then(() => {
+          console.log('Form data sent to Firestore');
           this.router.navigate(['/brokerdisp']);
-        },
-        (error) => {
-          console.log('Error sending form data to Firebase:', error);
-        }
-      );
+        })
+        .catch((error: any) => {
+          console.log('Error sending form data to Firestore:', error);
+        });
     }
 
     this.bForm.reset();
   }
+
 
   brokerSelected(broker: any) {
     this.bForm.patchValue(broker);

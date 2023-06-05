@@ -8,7 +8,7 @@
         <label for="Broker" class="block">Broker</label>
         <input type="text" placeholder="--All Broker--" formControlName="broker" readonly appBrokers
           [forform]="bForm.value.broker" (formemit)="onSelectedBrokerName($event)" required
-          class="w-full border border-indigo-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          class="w-full border border-indigo-300 px-4 py-2 mt-4 rounded-md focus:outline-none focus:ring focus:border-blue-500">
       </div>
       <br>
       <div>
@@ -97,7 +97,7 @@
       <input type="text" formControlName="escorts"
         class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"><br><br>
 
-      <div class="border p-10 bg-gray-300  rounded-lg border-dotted	border-2 w-80">
+      <div class=" p-10 bg-gray-300  rounded-lg border-dotted	border-2 w-80">
         <button type="button" (click)="addLeg()"
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">Add Leg</button><br>
 

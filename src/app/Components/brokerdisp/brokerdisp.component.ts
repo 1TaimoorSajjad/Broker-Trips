@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 interface BrokerFormData {
   id: string;
@@ -32,21 +33,20 @@ interface Leg {
 })
 export class BrokerdispComponent implements OnInit {
   dispData: BrokerFormData[] = [];
+  data$!: Observable<BrokerFormData[]>;
+  collectionRef: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private router: Router, private firestore: Firestore) {}
 
   ngOnInit(): void {
+    const collectionRef = collection(this.firestore, 'BrokerTrips');
+    this.data$ = this.collectionRef.valueChanges();
     this.fetchData();
   }
 
   fetchData() {
-    const firebaseURL = 'https://brokerform-2a640-default-rtdb.firebaseio.com/';
-    this.http.get(`${firebaseURL}/brokerforms.json`).subscribe((data: any) => {
-      if (data) {
-        this.dispData = Object.keys(data).map((key) => {
-          return { id: key, ...data[key] };
-        });
-      }
+    this.data$.subscribe((data: BrokerFormData[]) => {
+      this.dispData = data;
     });
   }
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-brokerlist',
   templateUrl: './brokerlist.component.html',
@@ -9,6 +10,7 @@ export class BrokerlistComponent {
   @Input() blist: any
   @Output() selectbrokerData = new EventEmitter<string>()
   selectedBroker: any;
+  brokerRef: any;
   brokers: any[] = 
   [
     {
@@ -90,9 +92,27 @@ export class BrokerlistComponent {
       broker: 'CalOptima'
     },
   ]
+
+  constructor(
+    private firestore: Firestore,
+    private router: Router,
+
+  ){
+    this.brokerRef = collection(this.firestore, 'BrokerNames');
+  }
 onBrokerSelected(bro: any){
   this.selectedBroker = bro;
   this.selectbrokerData.emit(this.selectedBroker)
+  console.log("Broker list")
+
+  addDoc(this.brokerRef, this.brokers)
+  .then(() => {
+    console.log('Form data sent to Firestore');
+    this.router.navigate(['/brokerdisp']);
+  })
+  .catch((error: any) => {
+    console.log('Error sending form data to Firestore:', error);
+  });
 }
 
 }
