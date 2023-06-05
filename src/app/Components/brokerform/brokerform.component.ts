@@ -1,13 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Firestore, collectionData, collection, addDoc, updateDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  addDoc,
+  updateDoc,
+} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-brokerform',
   templateUrl: './brokerform.component.html',
-  styleUrls: ['./brokerform.component.css']
+  styleUrls: ['./brokerform.component.css'],
 })
 export class BrokerformComponent implements OnInit {
   bForm!: FormGroup;
@@ -16,8 +27,6 @@ export class BrokerformComponent implements OnInit {
   index!: number;
   collectionRef: any;
 
-
-
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -25,12 +34,9 @@ export class BrokerformComponent implements OnInit {
     private firestore: Firestore
   ) {
     this.collectionRef = collection(this.firestore, 'BrokerTrips');
-
   }
 
   ngOnInit(): void {
-   
-
     this.bForm = this.fb.group({
       broker: [''],
       clientName: [''],
@@ -65,7 +71,6 @@ export class BrokerformComponent implements OnInit {
           console.log('Error updating form data in Firestore:', error);
         });
     } else {
-
       addDoc(this.collectionRef, formData)
         .then(() => {
           console.log('Form data sent to Firestore');
@@ -78,7 +83,6 @@ export class BrokerformComponent implements OnInit {
 
     this.bForm.reset();
   }
-
 
   brokerSelected(broker: any) {
     this.bForm.patchValue(broker);

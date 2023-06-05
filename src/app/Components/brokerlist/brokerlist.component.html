@@ -1,6 +1,10 @@
 <ul class="absolute top-2 h-64 overflow-y-auto bg-white shadow rounded-lg w-64">
-    <li class="text-sm hover:bg-indigo-100 block px-4 py-2 font-medium" *ngFor="let bname of brokers" [ngClass]="{'bg-indigo-500 text-white': blist === bname.broker}"
-      (click)="onBrokerSelected(bname.broker)">
-      {{ bname.broker }}
-    </li>
-  </ul>
+  <li
+    class="text-sm hover:bg-indigo-100 block px-4 py-2 font-medium"
+    *ngFor="let bname of brokers"
+    [ngClass]="{ 'bg-indigo-500 text-white': blist === bname.broker }"
+    (click)="onBrokerSelected(bname.broker)"
+  >
+    {{ bname.broker }}
+  </li>
+</ul>

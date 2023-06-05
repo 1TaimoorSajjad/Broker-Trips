@@ -4,115 +4,99 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-brokerlist',
   templateUrl: './brokerlist.component.html',
-  styleUrls: ['./brokerlist.component.css']
+  styleUrls: ['./brokerlist.component.css'],
 })
 export class BrokerlistComponent {
-  @Input() blist: any
-  @Output() selectbrokerData = new EventEmitter<string>()
+  @Input() blist: any;
+  @Output() selectbrokerData = new EventEmitter<string>();
   selectedBroker: any;
   brokerRef: any;
-  brokers: any[] = 
-  [
+  brokers: any[] = [
     {
-      broker: 'Access2Care'
+      broker: 'Access2Care',
     },
     {
-      broker: 'Abc Insurance'
+      broker: 'Abc Insurance',
     },
     {
-      broker: 'Logisticare'
+      broker: 'Logisticare',
     },
     {
-      broker: 'MTM'
+      broker: 'MTM',
     },
     {
-      broker: 'American Logistics'
+      broker: 'American Logistics',
     },
     {
-      broker: 'VA Premier'
+      broker: 'VA Premier',
     },
     {
-      broker: 'NMN'
+      broker: 'NMN',
     },
     {
-      broker: 'MAS'
+      broker: 'MAS',
     },
     {
-      broker: 'Verida'
+      broker: 'Verida',
     },
     {
-      broker: 'Private Pay'
+      broker: 'Private Pay',
     },
     {
-      broker: 'Medicaid'
+      broker: 'Medicaid',
     },
     {
-      broker: 'Epic'
+      broker: 'Epic',
     },
     {
-      broker: 'Amera'
+      broker: 'Amera',
     },
     {
-      broker: 'OneCall'
+      broker: 'OneCall',
     },
     {
-      broker: 'Veyo'
+      broker: 'Veyo',
     },
     {
-      broker: 'LCP'
+      broker: 'LCP',
     },
     {
-      broker: 'Medex'
+      broker: 'Medex',
     },
     {
-      broker: 'ARN'
+      broker: 'ARN',
     },
     {
-      broker: 'Call the Car'
+      broker: 'Call the Car',
     },
     {
-      broker: 'Modivcare'
+      broker: 'Modivcare',
     },
     {
-      broker: 'WellTrans'
+      broker: 'WellTrans',
     },
     {
-      broker: 'Tennessee Carriers'
+      broker: 'Tennessee Carriers',
     },
     {
-      broker: 'SafeRide'
+      broker: 'SafeRide',
     },
     {
-      broker: 'Ride2MD'
+      broker: 'Ride2MD',
     },
     {
-      broker: 'IEHP'
+      broker: 'IEHP',
     },
     {
-      broker: 'CalOptima'
+      broker: 'CalOptima',
     },
-  ]
+  ];
 
-  constructor(
-    private firestore: Firestore,
-    private router: Router,
-
-  ){
+  constructor(private firestore: Firestore, private router: Router) {
     this.brokerRef = collection(this.firestore, 'BrokerNames');
   }
-onBrokerSelected(bro: any){
-  this.selectedBroker = bro;
-  this.selectbrokerData.emit(this.selectedBroker)
-  console.log("Broker list")
-
-  addDoc(this.brokerRef, this.brokers)
-  .then(() => {
-    console.log('Form data sent to Firestore');
-    this.router.navigate(['/brokerdisp']);
-  })
-  .catch((error: any) => {
-    console.log('Error sending form data to Firestore:', error);
-  });
-}
-
+  onBrokerSelected(bro: any) {
+    this.selectedBroker = bro;
+    this.selectbrokerData.emit(this.selectedBroker);
+  }
 }

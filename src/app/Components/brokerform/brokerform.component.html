@@ -6,119 +6,198 @@
     <form [formGroup]="bForm" (ngSubmit)="onSubmit()" class="mt-4">
       <div class="realtive w-64">
         <label for="Broker" class="block">Broker</label>
-        <input type="text" placeholder="--All Broker--" formControlName="broker" readonly appBrokers
-          [forform]="bForm.value.broker" (formemit)="onSelectedBrokerName($event)" required
-          class="w-full border border-indigo-300 px-4 py-2 mt-4 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+        <input
+          type="text"
+          placeholder="--All Broker--"
+          formControlName="broker"
+          readonly
+          appBrokers
+          [forform]="bForm.value.broker"
+          (formemit)="onSelectedBrokerName($event)"
+          required
+          class="w-full border border-indigo-300 px-4 py-2 mt-4 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        />
       </div>
-      <br>
+      <br />
       <div>
         <label for="Client Name" class="block">Client Name</label>
-        <input type="text" formControlName="clientName"
-          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"><br>
+        <input
+          type="text"
+          formControlName="clientName"
+          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        /><br />
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="Tripid" class="block">Trip ID</label>
-          <input type="text" formControlName="tripId"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <input
+            type="text"
+            formControlName="tripId"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
         <div>
-          <label for="insurance" class="block mt-2">Insurance ID / Leg ID</label>
-          <input type="text" formControlName="insuranceId"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <label for="insurance" class="block mt-2"
+            >Insurance ID / Leg ID</label
+          >
+          <input
+            type="text"
+            formControlName="insuranceId"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
       </div>
       <div>
         <label for="ClientID" class="block mt-2">Client ID / Member ID</label>
-        <input type="text" formControlName="clientId"
-          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
-
+        <input
+          type="text"
+          formControlName="clientId"
+          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        />
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="phone" class="block">Phone Number</label>
-          <input type="text" formControlName="phoneNumber"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
-
+          <input
+            type="text"
+            formControlName="phoneNumber"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
         <div>
           <label for="cell" class="block mt-2">Cell Number (Optional)</label>
-          <input type="text" formControlName="cellNumber"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <input
+            type="text"
+            formControlName="cellNumber"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
       </div>
       <div>
         <label for="PU" class="block">Pickup Address</label>
-        <input type="text" placeholder="Enter a location" formControlName="pickAddress"
-          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
-
+        <input
+          type="text"
+          placeholder="Enter a location"
+          formControlName="pickAddress"
+          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        />
       </div>
       <div>
         <label for="DO" class="block">Dropoff Address</label>
-        <input type="text" placeholder="Enter a location" formControlName="dropAddress"
-          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
-
+        <input
+          type="text"
+          placeholder="Enter a location"
+          formControlName="dropAddress"
+          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        />
       </div>
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="state" class="block">State</label>
-          <input type="text" placeholder="--Select State--" formControlName="state"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <input
+            type="text"
+            placeholder="--Select State--"
+            formControlName="state"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
         <div>
           <label for="miles" class="block mt-2">Miles</label>
-          <input type="text" formControlName="miles"
-            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+          <input
+            type="text"
+            formControlName="miles"
+            class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+          />
         </div>
       </div>
       <div>
         <label for="cNotes" class="block">Company/Driver Notes</label>
-        <textarea name="txt" id="" cols="100" rows="10" formControlName="cNotes"
-          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"></textarea>
+        <textarea
+          name="txt"
+          id=""
+          cols="100"
+          rows="10"
+          formControlName="cNotes"
+          class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+        ></textarea>
       </div>
-      <br>
+      <br />
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="sTime" class="block">Schedule Time</label>
-          <input type="date" class="">
+          <input type="date" class="" />
         </div>
         <div>
           <label for="aTime" class="block mt-2">Appointment Time</label>
-          <input type="date">
+          <input type="date" />
         </div>
       </div>
-      <label for="vehicle">Select Trip Requirement</label><br>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-20">Car 1</button><button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Car 2</button><br>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-20 mt-3">Car
-        3</button><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Car
-        4</button><br>
-      <label for="escorts">No. of Escorts</label><br>
-      <input type="text" formControlName="escorts"
-        class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"><br><br>
+      <label for="vehicle">Select Trip Requirement</label><br />
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-20"
+      >
+        Car 1</button
+      ><button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Car 2</button
+      ><br />
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-20 mt-3"
+      >
+        Car 3</button
+      ><button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Car 4</button
+      ><br />
+      <label for="escorts">No. of Escorts</label><br />
+      <input
+        type="text"
+        formControlName="escorts"
+        class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+      /><br /><br />
 
-      <div class=" p-10 bg-gray-300  rounded-lg border-dotted	border-2 w-80">
-        <button type="button" (click)="addLeg()"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">Add Leg</button><br>
+      <div class="p-10 bg-gray-300 rounded-lg border-dotted border-2 w-80">
+        <button
+          type="button"
+          (click)="addLeg()"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Add Leg</button
+        ><br />
 
         <div formArrayName="legs">
-          <div *ngFor="let leg of legControls.controls; let i = index" [formGroupName]="i">
+          <div
+            *ngFor="let leg of legControls.controls; let i = index"
+            [formGroupName]="i"
+          >
             <div>
               <label for="legpu" class="block"> PickUp Address</label>
-              <input formControlName="pickAddress" type="text"
-                class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+              <input
+                formControlName="pickAddress"
+                type="text"
+                class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
             </div>
             <div>
               <label for="legpu" class="block mt-2"> Dropoff Address</label>
-              <input formControlName="dropAddress" type="text"
-                class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500">
+              <input
+                formControlName="dropAddress"
+                type="text"
+                class="border border-gray-300 px-4 py-2 mt-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+              />
             </div>
           </div>
         </div>
       </div>
 
-      <button type="submit"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">Create</button>
+      <button
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+      >
+        Create
+      </button>
     </form>
   </div>
 </div>

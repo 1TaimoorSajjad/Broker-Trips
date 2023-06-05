@@ -29,7 +29,7 @@ interface Leg {
 @Component({
   selector: 'app-brokerdisp',
   templateUrl: './brokerdisp.component.html',
-  styleUrls: ['./brokerdisp.component.css']
+  styleUrls: ['./brokerdisp.component.css'],
 })
 export class BrokerdispComponent implements OnInit {
   dispData: BrokerFormData[] = [];
