@@ -65,7 +65,8 @@ export class BrokerdispComponent implements OnInit {
   }
   deleteData(id: string) {
     if (id) {
-      const documentRef = doc(this.firestore, 'BrokerTrips', id); 
+      const documentRef = doc(this.firestore, 'BrokerTrips', id);
+      //funtion working 
       deleteDoc(documentRef) 
         .then(() => {
           console.log('Document deleted successfully');
